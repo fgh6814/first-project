@@ -1,0 +1,22 @@
+notebookId = "52cb2197-b76a-40f3-a70e-d00ea128bf2d"
+
+[cells.99dbd14c-da6f-4f62-9e16-7c6508d9caa3]
+cellType = "code"
+code = """
+import random
+randInt = random.randint(0, 100)
+"""
+
+[cells.b26ac767-224f-401e-aa30-f8400d449d54]
+cellType = "code"
+code = """
+import zero_true as zt
+slider=zt.Slider(id='slide')
+print(slider.value)
+if( slider.value< randInt):
+  print("Too low!")
+elif(slider.value> randInt):
+  print("Too high!")
+else:
+  print("you guess it right! the number was: ", str(randInt))"""
+
