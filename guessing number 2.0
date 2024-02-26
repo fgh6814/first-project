@@ -1,0 +1,24 @@
+import random
+import zero_true as zt
+import matplotlib.pyplot as plt
+state = zt.state()
+if "previous guesses" not in state.keys():
+    state["previous guesses"]=[]
+slider_values = []
+if "value" not in state.keys():
+    state["value"]=random.randint(0,100)
+randInt = state['value']
+slider = zt.Slider(id='slide')
+print(slider.value)
+#add slider value to previous guesses
+state["previous guesses"].append(slider.value)
+print(state["previous guesses"])
+if slider.value < randInt:
+    print("Too low!")
+elif slider.value > randInt:
+    print("Too high!")
+else:
+    print("You guessed it right! The number was:", str(randInt))
+    del state['previous guesses']
+    del state['value']
+slider_values.append(slider.value)
