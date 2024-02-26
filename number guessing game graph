@@ -1,0 +1,35 @@
+import random
+import zero_true as zt
+import matplotlib.pyplot as plt
+
+# Initialize an empty list to store slider values
+slider_values = []
+
+# Function to update the plot
+def update_plot():
+    plt.plot(slider_values, marker='o', linestyle='None')
+    plt.xlabel('Attempts')
+    plt.ylabel('Slider Value')
+    plt.title('Slider Value vs Attempts')
+    plt.show()
+
+randInt = random.randint(0, 100)
+slider = zt.Slider(id='slide')
+
+print(slider.value)
+if slider.value < randInt:
+    print("Too low!")
+elif slider.value > randInt:
+    print("Too high!")
+else:
+    print("You guessed it right! The number was:", str(randInt))
+
+# Add the first slider value to the list
+slider_values.append(slider.value)
+update_plot()
+
+# Loop to continuously update the plot as the slider moves
+while True:
+    slider.move(random.randint(-10, 10))  # Move the slider randomly
+    slider_values.append(slider.value)  # Add the new slider value to the list
+    update_plot()  # Update the plot
