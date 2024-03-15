@@ -1,0 +1,36 @@
+import random
+import zero_true as zt
+import matplotlib.pyplot as plt
+state = zt.state()
+plt.clf()
+if "previous guesses" not in state.keys():
+    state["previous guesses"]=[]
+if "game result" not in state.keys():
+    state["game result"]={}
+if "game number" not in state.keys():
+    state["game number"]=1
+slider_values = []
+if "value" not in state.keys():
+    state["value"]=random.randint(0,100)
+randInt = state['value']
+slider = zt.Slider(id='slide')
+print(slider.value)
+#add slider value to previous guesses
+state["previous guesses"].append(slider.value)
+print(state["previous guesses"])
+if slider.value < randInt:
+    print("Too low!")
+elif slider.value > randInt:
+    print("Too high!")
+else:
+    print("You guessed it right! The number was:", str(randInt))
+    state["game result"][state["game number"]]=len(state['previous guesses'])
+    state['game number']+=1
+    del state['previous guesses']
+    del state['value']
+slider_values.append(slider.value)
+# Plot the success rates and trials taken
+plt.plot(state["game result"].keys(), state["game result"].values(), marker='o')
+plt.xlabel('game number')
+plt.ylabel('number of trials')
+zt.Matplotlib.from_matplotlib(id="graph", figure=plt.gcf(), alt="", width=200, height=200)
